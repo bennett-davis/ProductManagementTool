@@ -33,6 +33,17 @@
   text-decoration: none;
 }
 
+.valid {
+  display: none;
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .title a:hover,
 .title a:focus,
 .title a:active {
@@ -43,6 +54,8 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  padding-bottom: 2rem;
+  
 }
 
 .title,
@@ -85,6 +98,16 @@
   max-width: 300px;
 }
 
+.button {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 2rem;
+}
+
+.searchBar {
+  padding-bottom: 2rem;
+}
+
 .card:hover,
 .card:focus,
 .card:active {
@@ -106,6 +129,12 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.form {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 600px) {

@@ -20,7 +20,7 @@ export const addProduct = async (req, res, next) => {
     const validation = await validateProduct(req.body);
     if (validation.success === false) {
         res.statusCode = 400;
-        res.send(validation.message);
+        res.send(validation);
     }
     else {
         let newProduct = new Product({
@@ -42,7 +42,7 @@ export const addProduct = async (req, res, next) => {
                 next(error);
             }
             else {
-                res.send(data);
+                res.send({success: true});
             }
         });
     }
@@ -77,10 +77,10 @@ const getUniqueValues = (arr, prop) => {
 
 const validateProduct = async (product) => {
     if (!product || Object.keys(product).length === 0) return { success: false, message: "Request body was empty" };
-    if (!product.hasOwnProperty("name")) return { success: false, message: "Property name was not provided" };
-    if (!product.hasOwnProperty("upc")) return { success: false, message: "Property upc was not provided" };
-    if (!product.hasOwnProperty("available_on")) return { success: false, message: "Property available_on was not provided" };
-    if (!product.hasOwnProperty("properties")) return { success: false, message: "Property properties was not provided" };
+    if (!product.hasOwnProperty("name") || product.name === "") return { success: false, message: "Property name was not provided" };
+    if (!product.hasOwnProperty("upc") || product.upc === "") return { success: false, message: "Property upc was not provided" };
+    if (!product.hasOwnProperty("available_on") || product.available_on === "") return { success: false, message: "Property available_on was not provided" };
+    if (!product.hasOwnProperty("properties") || product.name === "") return { success: false, message: "Property properties was not provided" };
 
     // Validate name
     if (typeof product.name !== "string") return { success: false, message: "Product name was not a string" };
@@ -106,11 +106,11 @@ const validateProduct = async (product) => {
         let property = product.properties[i];
         // Validate property name
         if (typeof property.name !== "string") return { success: false, message: "Property name was not a string" };
-        if (property.name.length > 255) return { success: false, message: "Property name was not a valid length" };
+        if (property.name.length > 255 ) return { success: false, message: "Property name was not a valid length" };
 
         // Validate property value
         if (typeof property.value !== "string") return { success: false, message: "Property value was not a string" };
-        if (property.value.length > 255) return { success: false, message: "Property value was not a valid length" };
+        if (property.value.length > 255 ) return { success: false, message: "Property value was not a valid length" };
     }
 
     return { success: true };
