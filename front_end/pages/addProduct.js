@@ -1,15 +1,28 @@
 import styles from '../styles/Home.module.css'
 import React from "react"
-
 import { Container, Row, Col, Button} from "reactstrap"
 import { Form, FormGroup, FormText, Label, Input, FormFeedback } from "reactstrap"
 import { useState } from "react";
-
+ 
+class Product {
+    constructor () {
+        this.name = ''
+        this.upc = ''
+        this.available_on = ''
+        this.properties = []
+    }
+}
 
 class Property {
     constructor () {
-        this.name = "";
-        this.value = "";
+        this.name = ''
+        this.value = new ProductProperty()
+    }
+}
+
+class ProductProperty {
+    constructor () {
+        this.value = ''
     }
 }
 
@@ -43,8 +56,10 @@ export default function NewProduct () {
             productProperties.push(temp);
            
         }
+
+        const data = new Product();
        
-        const data = {
+        data = {
             name: event.target.productName.value,
             upc: event.target.upc.value,
             available_on: event.target.available_on.value,
@@ -184,3 +199,4 @@ export default function NewProduct () {
 
 }
 
+ 

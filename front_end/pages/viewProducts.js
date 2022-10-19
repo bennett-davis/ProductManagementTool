@@ -4,7 +4,13 @@ import { Container, Row, Col, Input } from 'reactstrap';
 
 export default function ViewProducts ( { products }) {
 
-    products.forEach(element => {
+    var productList = []
+
+    products.forEach(product => {
+        productList.push(product)
+    });
+
+    productList.forEach(element => {
         var newDate = new Date(element.available_on).toDateString()
          element.available_on = newDate
     })
@@ -13,8 +19,8 @@ export default function ViewProducts ( { products }) {
     function searchProducts (){
         var pro = document.getElementsByClassName("product");
         var input = document.getElementById("searchBar");
-        for (let index = 0; index < products.length; index++) {
-            if(products[index].name.toUpperCase().includes(input.value.toUpperCase())){
+        for (let index = 0; index < productList.length; index++) {
+            if(productList[index].name.toUpperCase().includes(input.value.toUpperCase())){
                 pro[index].style.display = ""
             }
             else {
@@ -42,7 +48,7 @@ export default function ViewProducts ( { products }) {
                     />
                     </div>
 
-                    {products.map((product) => (
+                    {productList.map((product) => (
                         
                         <div className="product">
                             <Row>
